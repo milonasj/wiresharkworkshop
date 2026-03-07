@@ -28,6 +28,17 @@ sudo chown -R www-data:www-data "$TARGET_DIR"
 sudo find "$TARGET_DIR" -type d -exec chmod 755 {} \;
 sudo find "$TARGET_DIR" -type f -exec chmod 644 {} \;
 
+# 5. Start/Restart Apache2
+echo "🚀 Starting Apache2..."
+sudo systemctl restart apache2
+
+# 6. Verify Service Status
+if systemctl is-active --quiet apache2; then
+    echo "✅ Apache2 is running!"
+else
+    echo "⚠️ Warning: Apache2 failed to start. Check 'systemctl status apache2'"
+fi
+
 # 5. Cleanup
 rm -rf ./temp_quackers
 echo "Done! Quackers is live."
